@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Theme: Apply before first paint to prevent flicker -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var preferLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      var theme = saved || (preferLight ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Computer Engineering student at VVP Engineering College with strong interest in Python, data analytics, and machine learning.">
+  <meta name="keywords"
+    content="AI Engineer, ML Engineer, Python Developer, Data Analyst, Computer Engineering, Portfolio">
+  <meta name="author" content="Shyam Parsana">
+  <meta name="theme-color" content="#0f172a">
+  <title>Shyam Parsana | AI & ML Engineer</title>
+
+  <!-- Fonts - Using system fallbacks for offline support -->
+  <!-- For better fonts, download from fonts/ folder and uncomment the CSS variables -->
+
+  <!-- GSAP - Local Libraries (Save files from OFFLINE_SETUP.md) -->
+  <script src="lib/gsap.min.js"></script>
+  <script src="lib/ScrollTrigger.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- ========================================
+       Pre-Loader
+  ======================================== -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-content">
+      <!-- Spinning rings -->
+      <div class="preloader-ring ring-outer"></div>
+      <div class="preloader-ring ring-middle"></div>
+
+      <!-- Profile Circle -->
+      <div class="preloader-circle">
+        <img src="photo/3D6A2306-removebg-preview.png" alt="Loading Profile" class="preloader-avatar-img" />
+      </div>
+
+      <!-- Name -->
+      <div class="preloader-name">Shyam Parsana</div>
+      <div class="preloader-subtitle">AI &amp; ML Engineer</div>
+
+      <!-- Progress bar -->
+      <div class="preloader-bar-wrap">
+        <div class="preloader-bar" id="preloader-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" style="display: none;">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
+  <!-- Particle Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Page Transition Overlay -->
+  <div id="page-transition" class="page-transition">
+    <div class="transition-layer"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="text-primary">&lt;</span>Shyam<span class="text-primary"> /&gt;</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-nav-links">
+      <li><a href="#home" class="mobile-nav-link" data-section="home">Home</a></li>
+      <li><a href="#about" class="mobile-nav-link" data-section="about">About</a></li>
+      <li><a href="#skills" class="mobile-nav-link" data-section="skills">Skills</a></li>
+      <li><a href="#projects" class="mobile-nav-link" data-section="projects">Projects</a></li>
+      <li><a href="#education" class="mobile-nav-link" data-section="education">Education</a></li>
+      <li><a href="#contact" class="mobile-nav-link" data-section="contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <!-- Floating Shapes -->
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="decorative-square"></div>
+        <div class="decorative-circle"></div>
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+      </div>
+
+      <div class="hero-content">
+        <!-- Availability Badge -->
+        <div class="availability-badge animate-fade-in">
+          <span class="pulse-dot"></span>
+          <span>Available for opportunities</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="hero-title animate-slide-up">
+          Hi, I'm <span class="gradient-text">Shyam Parsana</span>
+        </h1>
+
+        <!-- Typewriter -->
+        <div class="typewriter-container animate-slide-up delay-1">
+          <span id="typewriter" class="typewriter-text"></span>
+          <span class="cursor">|</span>
+        </div>
+
+        <!-- Description -->
+        <p class="hero-description animate-slide-up delay-2">
+          Computer Engineering student with strong interest in Python, data analytics, and machine learning. Quick
+          learner eager to contribute to real-world projects.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-buttons animate-slide-up delay-3">
+          <a href="#projects" class="btn btn-primary">
+            View Projects
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M19 12l-7 7-7-7" />
+            </svg>
+          </a>
+          <a href="shyamresume.pdf" class="btn btn-outline" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Resume
+          </a>
+
+          <a href="#contact" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            Contact Me
+          </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+          <div class="mouse">
+            <div class="mouse-wheel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="text-primary">&lt;</span>About Me<span class="text-primary"> /&gt;</span>
+          </h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <div class="about-grid">
+          <!-- Profile Image -->
+          <div class="about-image-container">
+            <div class="profile-wrapper">
+              <div class="profile-ring ring-1"></div>
+              <div class="profile-ring ring-2"></div>
+              <div class="profile-image">
+                <img src="photo/profile_new.png" alt="Shyam Parsana" class="profile-placeholder" />
+              </div>
+              <div class="floating-badge badge-1">Python Developer</div>
+              <div class="floating-badge badge-2">Data Analyst</div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="about-content">
+            <h3 class="about-subtitle">AI & ML Engineer</h3>
+
+            <p class="about-text">
+              I am a Computer Engineering student with strong interest in Python, data analytics, and machine learning.
+              I have worked with Pandas, NumPy, Matplotlib, Scikit-learn, and PyTorch to analyze data and build models.
+            </p>
+
+            <p class="about-text">
+              As a quick learner and eager contributor, I am looking for opportunities to apply my skills to real-world
+              projects and build intelligent software solutions.
+            </p>
+
+            <!-- Highlights -->
+            <div class="highlights">
+              <div class="highlight-card">
+                <div class="highlight-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                </div>
+                <div class="highlight-text">
+                  <strong>Clean Code</strong>
+                  <span>Writing maintainable, scalable code</span>
+                </div>
+              </div>
+              <div class="highlight-card">
+                <div class="highlight-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </div>
+                <div class="highlight-text">
+                  <strong>Problem Solver</strong>
+                  <span>Creative solutions to complex problems</span>
+                </div>
+              </div>
+              <div class="highlight-card">
+                <div class="highlight-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                    <polyline points="2 17 12 22 22 17" />
+                    <polyline points="2 12 12 17 22 12" />
+                  </svg>
+                </div>
+                <div class="highlight-text">
+                  <strong>Machine Learning</strong>
+                  <span>Building and training predictive models</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+      <div class="skills-bg">
+        <div class="skills-bg-shape shape-left"></div>
+        <div class="skills-bg-shape shape-right"></div>
+      </div>
+
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="text-primary">&lt;</span>Skills<span class="text-primary"> /&gt;</span>
+          </h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">Technologies and tools I work with to bring ideas to life</p>
+        </div>
+
+        <!-- Skills Categories -->
+        <div class="skills-categories">
+
+          <!-- AI & Machine Learning -->
+          <div class="skill-category glass">
+            <div class="category-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+              <h3>AI & Machine Learning</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag glow-hover">ML</span>
+              <span class="skill-tag glow-hover">DL</span>
+              <span class="skill-tag glow-hover">CV</span>
+              <span class="skill-tag glow-hover">Data Analytics</span>
+              <span class="skill-tag glow-hover">Data Visualization</span>
+            </div>
+          </div>
+
+          <!-- Programming -->
+          <div class="skill-category glass">
+            <div class="category-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <h3>Programming</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag glow-hover">Python</span>
+              <span class="skill-tag glow-hover">SQL</span>
+              <span class="skill-tag glow-hover">Html-5</span>
+              <span class="skill-tag glow-hover">CSS</span>
+            </div>
+          </div>
+
+          <!-- Libraries -->
+          <div class="skill-category glass">
+            <div class="category-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <h3>Libraries</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag glow-hover">NumPy</span>
+              <span class="skill-tag glow-hover">Pandas</span>
+              <span class="skill-tag glow-hover">Sklearn</span>
+              <span class="skill-tag glow-hover">PyTorch</span>
+              <span class="skill-tag glow-hover">Matplotlib</span>
+              <span class="skill-tag glow-hover">OpenCV</span>
+            </div>
+          </div>
+
+          <!-- Soft Skills -->
+          <div class="skill-category glass">
+            <div class="category-header">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <h3>Soft Skills</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag glow-hover">Problem Solving</span>
+              <span class="skill-tag glow-hover">Communication</span>
+              <span class="skill-tag glow-hover">Team work</span>
+              <span class="skill-tag glow-hover">Project Management</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="section-line"></div>
+
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="text-primary">&lt;</span>Projects<span class="text-primary"> /&gt;</span>
+          </h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">A showcase of my recent work and personal projects</p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+          <div class="project-card featured">
+            <div class="project-image">
+              <svg class="project-placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <div class="project-overlay">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link"
+                  aria-label="View on GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                </a>
+              </div>
+              <span class="featured-badge">Computer Vision</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Tumor Classification using CNNs</h3>
+              <p class="project-description">Developed a Convolutional Neural Network (CNN) to detect and classify brain
+                tumors from MRI scans with 94% validation accuracy.</p>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>PyTorch</span>
+                <span>OpenCV</span>
+                <span>NumPy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card featured">
+            <div class="project-image">
+              <svg class="project-placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                </path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <div class="project-overlay">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link"
+                  aria-label="View on GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                </a>
+              </div>
+              <span class="featured-badge">Predictive Modeling</span>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Credit Card Fraud Detection</h3>
+              <p class="project-description">Built a predictive machine learning model using Random Forest and SMOTE
+                techniques to detect highly imbalanced fraudulent credit transactions.</p>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Scikit-learn</span>
+                <span>Pandas</span>
+                <span>Matplotlib</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <svg class="project-placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                <path d="M2 12h20"></path>
+              </svg>
+              <div class="project-overlay">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link"
+                  aria-label="View on GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">E-commerce Customer Segmentation</h3>
+              <p class="project-description">Applied K-Means clustering to segment e-commerce customers based on
+                purchasing behavior to optimize targeted marketing strategies.</p>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Jupyter</span>
+                <span>Seaborn</span>
+                <span>SQL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View More -->
+        <div class="view-more">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+            View More on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education-section">
+      <div class="education-bg">
+        <div class="education-bg-shape shape-left"></div>
+        <div class="education-bg-shape shape-right"></div>
+      </div>
+
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="text-primary">&lt;</span>Education<span class="text-primary"> /&gt;</span>
+          </h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">My academic journey and educational background</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-node">
+              <div class="node-inner"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-card glass">
+                <div class="timeline-year">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  2023 - 2027
+                </div>
+                <h3 class="timeline-title">Bachelor Of Engineering</h3>
+                <div class="timeline-institution">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                  V.V.P. Engineering College
+                </div>
+                <div class="timeline-location">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Rajkot, India (CGPA: 8.61)
+                </div>
+                <p class="timeline-description">Computer Engineering student focusing on data analytics, machine
+                  learning, and solving real-world challenges through programming.</p>
+                <ul class="timeline-achievements">
+                  <li>Developed problem-solving and programming skills</li>
+                  <li>Learning Artificial Intelligence and Machine Learning concepts</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-line"></div>
+            <div class="timeline-node">
+              <div class="node-inner"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-card glass">
+                <div class="timeline-year">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  2021 - 2023
+                </div>
+                <h3 class="timeline-title">HSC Board - 12th</h3>
+                <div class="timeline-institution">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                  BAPS Swaminarayan Vidyamandir
+                </div>
+                <div class="timeline-location">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Gondal, India (PR: 84.27)
+                </div>
+                <p class="timeline-description">Completed higher secondary education in the Science stream.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item last">
+            <div class="timeline-node">
+              <div class="node-inner"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-card glass">
+                <div class="timeline-year">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                  2019 - 2021
+                </div>
+                <h3 class="timeline-title">SSC Board - 10th</h3>
+                <div class="timeline-institution">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                  BAPS Swaminarayan Vidyamandir
+                </div>
+                <div class="timeline-location">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Gondal, India (PR: 97.18)
+                </div>
+                <p class="timeline-description">Completed secondary education with excellent academic performance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="section-line"></div>
+      <div class="contact-bg">
+        <div class="contact-bg-shape shape-left"></div>
+        <div class="contact-bg-shape shape-right"></div>
+      </div>
+
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="text-primary">&lt;</span>Contact<span class="text-primary"> /&gt;</span>
+          </h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle">Have a project in mind or want to connect? Feel free to reach out!</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h3 class="contact-heading">Let's work together</h3>
+            <p class="contact-text">I'm always open to discussing new projects, creative ideas, or opportunities to be
+              part of your vision. Let's connect and create something amazing together!</p>
+
+            <!-- Contact Details -->
+            <div class="contact-details">
+              <div class="contact-item glass">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </div>
+                <div class="contact-detail">
+                  <span class="detail-label">Email</span>
+                  <a href="mailto:parsanashyam1310@gmail.com" class="detail-value"
+                    style="word-break: break-all;">parsanashyam1310@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="contact-item glass">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div class="contact-detail">
+                  <span class="detail-label">Location</span>
+                  <span class="detail-value">Om Nagar, Rajkot, India</span>
+                </div>
+              </div>
+
+              <div class="contact-item glass">
+                <div class="contact-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </div>
+                <div class="contact-detail">
+                  <span class="detail-label">Phone</span>
+                  <a href="tel:+919016754848" class="detail-value">+91 90167 54848</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-section">
+              <h4>Connect with me</h4>
+              <div class="social-links">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link glass"
+                  aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/shyam-parsana-214633290/" target="_blank" rel="noopener noreferrer" class="social-link glass"
+                  aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+                <a href="mailto:parsanashyam1310@gmail.com" class="social-link glass" aria-label="Email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrapper">
+            <form id="contact-form" class="contact-form glass">
+              <div class="form-field" id="form-field-1">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-field" id="form-field-2">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-field" id="form-field-3">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+              </div>
+              <div class="form-field" id="form-field-4">
+                <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Logo -->
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo">
+            <span class="text-primary">&lt;</span>Shyam<span class="text-primary"> /&gt;</span>
+          </a>
+          <p>Building the future, one line of code at a time.</p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="footer-nav">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Social -->
+        <div class="footer-social">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/shyam-parsana-214633290/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a href="mailto:parsanashyam1310@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <p>&copy; 2026 Shyam Parsana. Made with
+          <svg viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" width="16" height="16"
+            class="heart-icon">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          using HTML, CSS & JavaScript
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+
+</html>
