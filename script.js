@@ -221,7 +221,12 @@ function initParticles() {
 // ========================================
 function initTypewriter() {
   const element = document.getElementById('typewriter');
-  const words = ['AI & ML Engineer', 'Python Developer', 'Data Analyst'];
+  const words = [
+    'AI & ML Engineer',
+    'Data Analyst',
+    'Power BI & Analytics',
+    'Python Developer'
+  ];
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -404,7 +409,7 @@ function initProject3DHover() {
 
   if (window.matchMedia('(pointer: coarse)').matches) return; // Skip on mobile
 
-  cards.forEach(card => {
+  cards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left; // x position within the element
