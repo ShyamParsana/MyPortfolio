@@ -32,7 +32,7 @@
 // DOM Ready
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();
+
   initParticles();
   initTypewriter();
   initNavigation();
@@ -44,43 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageTransitions();
 });
 
-// ========================================
-// Theme Toggle
-// ========================================
-function initThemeToggle() {
-  const btn = document.getElementById('theme-toggle');
-  const sunIcon = btn.querySelector('.sun-icon');
-  const moonIcon = btn.querySelector('.moon-icon');
-
-  // Check local storage or system preference
-  const savedTheme = localStorage.getItem('theme');
-  const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-
-  const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-
-    if (theme === 'light') {
-      sunIcon.style.display = 'none';
-      moonIcon.style.display = 'block';
-    } else {
-      sunIcon.style.display = 'block';
-      moonIcon.style.display = 'none';
-    }
-
-    // Dispatch event for components that need to react (like particles)
-    window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
-  }
-
-  applyTheme(initialTheme);
-
-  btn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  });
-}
 
 // ========================================
 // Particle Background
@@ -90,7 +53,6 @@ function initParticles() {
   const ctx = canvas.getContext('2d');
   let particles = [];
   let mouse = { x: null, y: null, radius: 150 };
-  let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -102,9 +64,6 @@ function initParticles() {
     mouse.y = e.y;
   });
 
-  window.addEventListener('themeChanged', (e) => {
-    currentTheme = e.detail.theme;
-  });
 
   class Particle {
     constructor() {
@@ -158,8 +117,7 @@ function initParticles() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
-      const isLight = currentTheme === 'light';
-      ctx.fillStyle = isLight ? `rgba(0, 184, 212, ${this.opacity})` : `rgba(0, 229, 255, ${this.opacity})`;
+      ctx.fillStyle = `rgba(0, 229, 255, ${this.opacity})`;
       ctx.fill();
     }
   }
@@ -174,7 +132,6 @@ function initParticles() {
   }
 
   function connectParticles() {
-    const isLight = currentTheme === 'light';
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -184,7 +141,7 @@ function initParticles() {
         if (distance < 120) {
           const opacity = (1 - distance / 120) * 0.25;
           ctx.beginPath();
-          ctx.strokeStyle = isLight ? `rgba(101, 31, 255, ${opacity})` : `rgba(0, 229, 255, ${opacity})`;
+          ctx.strokeStyle = `rgba(0, 229, 255, ${opacity})`;
           ctx.lineWidth = 0.5;
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);

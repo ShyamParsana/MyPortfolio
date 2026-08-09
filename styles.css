@@ -743,12 +743,12 @@ body {
 ======================================== */
 .section {
   position: relative;
-  padding: 6rem 0;
+  padding: 4rem 0;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 8rem 0;
+    padding: 5.5rem 0;
   }
 }
 
@@ -1834,9 +1834,20 @@ a.detail-value:hover {
   gap: 0.25rem;
 }
 
-.heart-icon {
+.footer-heart {
   display: inline-block;
-  vertical-align: middle;
+  color: #ff4d4d;
+  transition: transform 0.3s ease;
+}
+
+.footer-heart:hover {
+  transform: scale(1.35);
+  animation: heartPulse 0.8s infinite alternate;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.35); }
 }
 
 /* ========================================
@@ -1989,7 +2000,9 @@ a.detail-value:hover {
 .preloader-avatar-img {
   position: absolute;
   width: 88%;
-  height: 125%;
+  height: calc(125% + 50px);
+  padding-top: 50px;
+  box-sizing: border-box;
   bottom: 0;
   object-fit: contain;
   object-position: center bottom;

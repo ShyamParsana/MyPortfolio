@@ -1,16 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
-  <!-- Theme: Apply before first paint to prevent flicker -->
-  <script>
-    (function () {
-      var saved = localStorage.getItem('theme');
-      var preferLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-      var theme = saved || (preferLight ? 'light' : 'dark');
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
@@ -58,25 +49,6 @@
     </div>
   </div>
 
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">
-    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-      stroke-linejoin="round" style="display: none;">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-  </button>
 
   <!-- Particle Background Canvas -->
   <canvas id="particle-canvas"></canvas>
@@ -169,7 +141,7 @@
               <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg>
           </a>
-          <a href="shyamresume.pdf" class="btn btn-outline" download>
+          <a href="SHYAM_RESUME.pdf" class="btn btn-outline" download>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -219,7 +191,7 @@
                 <img src="photo/profile_new.png" alt="Shyam Parsana" class="profile-placeholder" />
               </div>
               <div class="floating-badge badge-1">AI &amp; ML Engineer</div>
-              <div class="floating-badge badge-2">Power BI &amp; Data Analytics</div>
+              <div class="floating-badge badge-2">Data Analytics</div>
             </div>
           </div>
 
@@ -403,7 +375,6 @@
 
     <!-- Projects Section -->
     <section id="projects" class="section projects-section">
-      <div class="section-line"></div>
 
       <div class="container">
         <!-- Section Header -->
@@ -474,8 +445,8 @@
                 <line x1="12" y1="22.08" x2="12" y2="12"></line>
               </svg>
               <div class="project-overlay">
-                <a href="https://github.com/ShyamParsana/Face-Eye-Tracking-AI" target="_blank" rel="noopener noreferrer" class="project-link"
-                  aria-label="View on GitHub">
+                <a href="https://github.com/ShyamParsana/Face-Eye-Tracking-AI" target="_blank" rel="noopener noreferrer"
+                  class="project-link" aria-label="View on GitHub">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                       d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
@@ -486,7 +457,8 @@
             </div>
             <div class="project-content">
               <h3 class="project-title">Face & Eye Tracking AI</h3>
-              <p class="project-description">High-performance real-time face & eye tracking AI powered by MediaPipe, OpenCV & FastAPI. Tracks 478 3D facial landmarks, head pose orientation, and blinks.</p>
+              <p class="project-description">High-performance real-time face & eye tracking AI powered by MediaPipe,
+                OpenCV & FastAPI. Tracks 478 3D facial landmarks, head pose orientation, and blinks.</p>
               <div class="project-tech">
                 <span>Python</span>
                 <span>MediaPipe</span>
@@ -710,7 +682,8 @@
                 </div>
                 <div class="contact-detail">
                   <span class="detail-label">Email</span>
-                  <a href="mailto:parsanashyam1310@gmail.com" class="detail-value"
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=parsanashyam1310@gmail.com" target="_blank"
+                    rel="noopener noreferrer" class="detail-value"
                     style="word-break: break-all;">parsanashyam1310@gmail.com</a>
                 </div>
               </div>
@@ -761,7 +734,8 @@
                     <circle cx="4" cy="4" r="2" />
                   </svg>
                 </a>
-                <a href="mailto:parsanashyam1310@gmail.com" class="social-link glass" aria-label="Email">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=parsanashyam1310@gmail.com" target="_blank"
+                  rel="noopener noreferrer" class="social-link glass" aria-label="Email">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
@@ -840,7 +814,8 @@
               <circle cx="4" cy="4" r="2" />
             </svg>
           </a>
-          <a href="mailto:parsanashyam1310@gmail.com" aria-label="Email">
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=parsanashyam1310@gmail.com" target="_blank"
+            rel="noopener noreferrer" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
@@ -851,14 +826,7 @@
 
       <!-- Copyright -->
       <div class="footer-copyright">
-        <p>&copy; 2026 Shyam Parsana. Made with
-          <svg viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="2" width="16" height="16"
-            class="heart-icon">
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
-          using HTML, CSS & JavaScript
-        </p>
+        <p>&copy; 2026 Shyam Parsana | Crafted with <span class="footer-heart">❤️</span></p>
       </div>
     </div>
   </footer>
